@@ -7,9 +7,9 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 public class SingleJobSingleStepTest extends AbstractBatchExport {
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/prefix.csv")
-    void testJobExecution(String prefix) throws Exception {
-        generateImportFile(BatchSingleApplication.class, "singleJobSingleStep.load", prefix);
+    @CsvFileSource(resources = "/batchexportconfig.csv")
+    void testJobExecution(String prefix, String databaseName) throws Exception {
+        generateImportFile(BatchSingleApplication.class, "singleJobSingleStep.load", prefix, databaseName);
     }
 
 }

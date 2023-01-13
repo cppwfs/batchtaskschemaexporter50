@@ -35,7 +35,7 @@ public abstract class AbstractBatchExport {
     }
 
 
-    public void configureImportFile(String nameOfFile, String prefix) throws Exception{
+    public void configureImportFile(String nameOfFile, String prefix, String databaseName) throws Exception{
         System.out.println(mariaDB.execInContainer("/usr/bin/mariadb-dump", "--password=test", "--user=test", "--all-databases", "--no-create-info", "--no-create-db", "--skip-comments", "--result-file=/usr/bin/" + CONTAINER_BATCH_LOAD_FILE_NAME));
         mariaDB.copyFileFromContainer("/usr/bin/" + CONTAINER_BATCH_LOAD_FILE_NAME, "./" + CONTAINER_BATCH_LOAD_FILE_NAME);
         ResourceLoader resourceLoader = new FileSystemResourceLoader();
@@ -52,6 +52,9 @@ public abstract class AbstractBatchExport {
                 String line = reader.readLine();
                 if (line == null)
                     break;
+                if (line.equals("USE `test`;")) {
+                    line = "USE `" + databaseName + "`;";
+                }
                 writer.write(line + "\n");
             }
             addPrefix(prefix, writer);
@@ -84,13 +87,13 @@ public abstract class AbstractBatchExport {
 
     }
 
-    protected void generateImportFile(Class clazz, String importFileName, String prefix) throws Exception {
+    protected void generateImportFile(Class clazz, String importFileName, String prefix, String databaseName) throws Exception {
         ConfigurableApplicationContext context = SpringApplication.run(clazz,
                 "--logging.level.org.springframework.cloud.task=DEBUG",
                 "--spring.datasource.password=" + mariaDB.getPassword(),
                 "--spring.datasource.username=" + mariaDB.getUsername(),
                 "--spring.datasource.url=" + mariaDB.getJdbcUrl(),
                 "--spring.datasource.driverClassName=org.mariadb.jdbc.Driver");
-        configureImportFile(importFileName, prefix);
+        configureImportFile(importFileName, prefix, databaseName);
     }
 }

@@ -14,4 +14,4 @@ mvn clean package
 ----
 
 If you want to change the prefix for the tables open the `src/test/resources/prefix.csv` file ane replace the word `default` with your prefix.
-THis will change all the prefixes for the Task and Batch tables to the specified value.  For example if you set the value in `prefix.csv` to `V3` then `TASK_EXECUTION`  would become `V3_EXECUTION`.
+THis will change all the prefixes for the Task and Batch tables to the specified value.  For example if you set the value in `batchexportconfig.csv` to `V3` then `TASK_EXECUTION`  would become `V3_EXECUTION`.
