@@ -39,19 +39,19 @@ class Batchschema30ApplicationTests {
 			ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
 			databasePopulator.addScript(new ClassPathResource("/org/springframework/batch/core/schema-mariadb.sql"));
 			databasePopulator.addScript(new ClassPathResource("/org/springframework/cloud/task/schema-mariadb.sql"));
-			databasePopulator.addScript(new FileSystemResource("/Users/grenfro/Downloads/batchschema/batchloadfiles/singleJobSingleStep.load"));
+			databasePopulator.addScript(new FileSystemResource("/Users/grenfro/Downloads/batchschema/batchloadfiles/singleJobSingleStepJobParam.load"));
 			databasePopulator.execute(dataSource);
 	}
 
 
-//	@Test
+	@Test
 	void testLoadDB() {
 		JdbcTemplate template  = new JdbcTemplate(dataSource);
-		List<Map<String,Object>> result = template.queryForList("select count(*) as mycount from V3_JOB_INSTANCE");
+		List<Map<String,Object>> result = template.queryForList("select count(*) as mycount from BATCH_JOB_INSTANCE");
 		assertEquals(1L, result.get(0).get("mycount"));
-		result = template.queryForList("select count(*) as mycount from V3_STEP_EXECUTION");
+		result = template.queryForList("select count(*) as mycount from BATCH_STEP_EXECUTION");
 		assertEquals(1L, result.get(0).get("mycount"));
-		result = template.queryForList("select count(*) as mycount from V3_EXECUTION");
+		result = template.queryForList("select count(*) as mycount from TASK_EXECUTION");
 		assertEquals(1L, result.get(0).get("mycount"));
 	}
 
