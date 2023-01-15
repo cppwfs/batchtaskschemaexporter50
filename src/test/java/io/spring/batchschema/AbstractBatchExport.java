@@ -288,12 +288,13 @@ public abstract class AbstractBatchExport {
         }
     }
     private void setPostgresSequences(BufferedWriter writer, long startValue, String taskPrefix, String batchPrefix) throws Exception {
-        writer.write("\n\nALTER SEQUENCE " + taskPrefix + "_SEQ START WITH " + startValue + "; \n");
-        writer.write("ALTER SEQUENCE " + batchPrefix + "_JOB_SEQ START WITH " + startValue + "; \n");
-        writer.write("ALTER SEQUENCE " + batchPrefix + "_STEP_EXECUTION_SEQ START WITH " + startValue + "; \n");
-        writer.write("ALTER SEQUENCE " + batchPrefix + "_JOB_EXECUTION_SEQ START WITH " + startValue + "; \n");
+        setGenericSequences(writer, startValue, taskPrefix, batchPrefix);
     }
     private void setMariadbSequences(BufferedWriter writer, long startValue, String taskPrefix, String batchPrefix) throws Exception {
+        setGenericSequences(writer, startValue, taskPrefix, batchPrefix);
+    }
+
+    private void setGenericSequences(BufferedWriter writer, long startValue, String taskPrefix, String batchPrefix) throws Exception{
         writer.write("\n\nALTER SEQUENCE " + taskPrefix + "_SEQ START WITH " + startValue + "; \n");
         writer.write("ALTER SEQUENCE " + batchPrefix + "_JOB_SEQ START WITH " + startValue + "; \n");
         writer.write("ALTER SEQUENCE " + batchPrefix + "_STEP_EXECUTION_SEQ START WITH " + startValue + "; \n");
