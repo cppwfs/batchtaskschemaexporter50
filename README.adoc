@@ -13,5 +13,10 @@ The tests create the DB load files for Spring Batch 5.x and Spring Cloud Task 3.
 mvn clean package
 ----
 
-If you want to change the prefix for the tables open the `src/test/resources/prefix.csv` file ane replace the word `default` with your prefix.
-THis will change all the prefixes for the Task and Batch tables to the specified value.  For example if you set the value in `batchexportconfig.csv` to `V3` then `TASK_EXECUTION`  would become `V3_EXECUTION`.
+== Configuration
+There is a CSV configuration file located at `src/test/resources/batchexportconfig.csv` with each column representing a setting that you can configure.
+Thee 3 settings that allow you to change the behavior of what is produced for the load file for each test are as follows
+
+1. Column 1 - *prefix:* Allows you to set the prefix for the task and batch tables.   Its default is `default` which means that the load scripts will use batch and task's default prefixes.   For example if you set the value in for the first column `batchexportconfig.csv` to `V3` then `TASK_EXECUTION`  would become `V3_EXECUTION`.
+2. Column 2 - *database type:* Allows you to specify the type of database for which the load data will be created. It defaults to MARIADB, but POSTGRES is also supported.
+3. Column 3 - *sequence start:* The number for which the sequences will be defaulted as their start value.  Defaults to 9000.
