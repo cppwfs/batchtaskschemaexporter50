@@ -38,7 +38,7 @@ public abstract class AbstractBatchExport {
     }
 
 
-    public void configureImportFile(String nameOfFile, String prefix, String databaseType) throws Exception {
+    public void configureImportFile(String nameOfFile, String prefix, String databaseType, long startValue) throws Exception {
         ResourceLoader resourceLoader = new FileSystemResourceLoader();
         Resource outResource = resourceLoader.getResource("./batchloadfiles/" + nameOfFile);
         WritableResource writableResource = (WritableResource) outResource;
@@ -46,7 +46,7 @@ public abstract class AbstractBatchExport {
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
         try {
             generateInserts(writer, prefix);
-            setSequences(writer, 1, prefix, databaseType);
+            setSequences(writer, startValue, prefix, databaseType);
         } finally {
             writer.close();
         }
@@ -266,7 +266,7 @@ public abstract class AbstractBatchExport {
                     "--spring.datasource.url=" + mariaDB.getJdbcUrl(),
                     "--spring.datasource.driverClassName=org.mariadb.jdbc.Driver");
         }
-        configureImportFile(importFileName, prefix, databaseType);
+        configureImportFile(importFileName, prefix, databaseType, startValue);
     }
 
     private void setTestSequenceToStartValue(long startValue) {
