@@ -27,7 +27,7 @@ public class TestSingleJobMultiStepFailedSecondStepConfiguration {
 
     @Bean
     public Job job(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
-        return new JobBuilder("job1", jobRepository)
+        return new JobBuilder("jobmultistepfailedsecondstep", jobRepository)
                 .start(new StepBuilder("job1step1", jobRepository).tasklet(new Tasklet() {
                     @Override
                     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)

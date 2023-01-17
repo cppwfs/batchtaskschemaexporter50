@@ -24,7 +24,7 @@ public class TestSingleConfiguration {
 
     @Bean
     public Job job(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
-        return new JobBuilder("job", jobRepository)
+        return new JobBuilder("jobsinglestep", jobRepository)
                 .start(new StepBuilder("job1step1", jobRepository)
                         .tasklet((contribution, chunkContext) -> RepeatStatus.FINISHED, transactionManager).build())
                 .build();
