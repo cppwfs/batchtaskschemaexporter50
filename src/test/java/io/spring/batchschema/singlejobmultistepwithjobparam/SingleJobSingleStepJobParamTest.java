@@ -14,7 +14,7 @@ public class SingleJobSingleStepJobParamTest extends AbstractBatchExport {
     @ParameterizedTest
     @CsvFileSource(resources = "/batchexportconfig.csv")
     void testJobExecution(String prefix, String databaseType, long sequenceStartVal) throws Exception {
-        generateImportFile(BatchSingleWithJobParamApplication.class, "singleJobSingleStepJobParam.load", prefix, databaseType, true, sequenceStartVal);
+        generateImportFile(BatchSingleWithJobParamApplication.class, "singleJobSingleStepJobParam.load", prefix, databaseType, "foo=bar", sequenceStartVal);
     }
 
 }

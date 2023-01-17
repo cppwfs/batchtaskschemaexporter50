@@ -108,16 +108,17 @@ public abstract class AbstractBatchExport {
     }
 
     private void generateBatchStepExecutionInserts(BufferedWriter writer, JdbcTemplate template, String prefix) throws Exception {
-        List<Map<String, Object>> result = template.queryForList("select COMMIT_COUNT, END_TIME, EXIT_CODE, " +
+        List<Map<String, Object>> result = template.queryForList("select COMMIT_COUNT, CREATE_TIME, END_TIME, EXIT_CODE, " +
                 "EXIT_MESSAGE, FILTER_COUNT, JOB_EXECUTION_ID, LAST_UPDATED, PROCESS_SKIP_COUNT, READ_COUNT, " +
                 "READ_SKIP_COUNT, ROLLBACK_COUNT, START_TIME, STATUS, STEP_EXECUTION_ID, STEP_NAME, " +
                 "VERSION, WRITE_COUNT, WRITE_SKIP_COUNT FROM " + prefix + "_STEP_EXECUTION");
         for (Map<String, Object> row : result) {
-            String batchStepExecution = "insert into " + prefix + "_STEP_EXECUTION (COMMIT_COUNT, END_TIME, EXIT_CODE, " +
+            String batchStepExecution = "insert into " + prefix + "_STEP_EXECUTION (COMMIT_COUNT, CREATE_TIME, END_TIME, EXIT_CODE, " +
                     "EXIT_MESSAGE, FILTER_COUNT, JOB_EXECUTION_ID, LAST_UPDATED, PROCESS_SKIP_COUNT, READ_COUNT, " +
                     "READ_SKIP_COUNT, ROLLBACK_COUNT, START_TIME, STATUS, STEP_EXECUTION_ID, STEP_NAME, " +
                     "VERSION, WRITE_COUNT, WRITE_SKIP_COUNT) " +
                     "values ('" + row.get("COMMIT_COUNT") + "'," +
+                    "'" + row.get("CREATE_TIME") + "'," +
                     "'" + row.get("END_TIME") + "'," +
                     "'" + row.get("EXIT_CODE") + "'," +
                     "'" + row.get("EXIT_MESSAGE") + "'," +
@@ -244,20 +245,24 @@ public abstract class AbstractBatchExport {
         return "'" + value + "'";
     }
 
-    protected void generateImportFile(Class clazz, String importFileName, String prefix, String databaseType, long startValue ) throws Exception {
-        generateImportFile(clazz, importFileName, prefix, databaseType, false, startValue);
+    protected void generateImportFile(Class clazz, String importFileName, String prefix, String databaseType, long startValue) throws Exception {
+        generateImportFile(clazz, importFileName, prefix, databaseType, null, startValue);
     }
 
-    protected void generateImportFile(Class clazz, String importFileName, String prefix, String databaseType,  boolean jobParam, long startValue) throws Exception {
-        setTestSequenceToStartValue(9000);
-        if (jobParam) {
-            SpringApplication.run(clazz,
-                    "--logging.level.org.springframework.cloud.task=DEBUG",
-                    "--spring.datasource.password=" + mariaDB.getPassword(),
-                    "--spring.datasource.username=" + mariaDB.getUsername(),
-                    "--spring.datasource.url=" + mariaDB.getJdbcUrl(),
-                    "--spring.datasource.driverClassName=org.mariadb.jdbc.Driver",
-                    "foo=bar");
+    protected void generateImportFile(Class clazz, String importFileName, String prefix, String databaseType, String param, long startValue) throws Exception {
+        setTestSequenceToStartValue(startValue);
+        if (param != null) {
+            try {
+                SpringApplication.run(clazz,
+                        "--logging.level.org.springframework.cloud.task=DEBUG",
+                        "--spring.datasource.password=" + mariaDB.getPassword(),
+                        "--spring.datasource.username=" + mariaDB.getUsername(),
+                        "--spring.datasource.url=" + mariaDB.getJdbcUrl(),
+                        "--spring.datasource.driverClassName=org.mariadb.jdbc.Driver",
+                        param);
+            } catch (Exception exception) {
+                System.out.println("Application failed to run.   This may have been by design.  Verify with test.");
+            }
         } else {
             SpringApplication.run(clazz,
                     "--logging.level.org.springframework.cloud.task=DEBUG",
@@ -280,21 +285,23 @@ public abstract class AbstractBatchExport {
     private void setSequences(BufferedWriter writer, long startIndex, String prefix, String databaseType) throws Exception {
         String batchPrefix = (prefix.equals("default") ? "BATCH" : prefix);
         String taskPrefix = (prefix.equals("default") ? "TASK" : prefix);
-        if(databaseType.equals("POSTGRESQL")) {
+        if (databaseType.equals("POSTGRESQL")) {
             setPostgresSequences(writer, startIndex, taskPrefix, batchPrefix);
         }
-        if(databaseType.equals("MYSQL") || databaseType.equals("MARIADB")) {
+        if (databaseType.equals("MYSQL") || databaseType.equals("MARIADB")) {
             setMariadbSequences(writer, startIndex, taskPrefix, batchPrefix);
         }
     }
+
     private void setPostgresSequences(BufferedWriter writer, long startValue, String taskPrefix, String batchPrefix) throws Exception {
         setGenericSequences(writer, startValue, taskPrefix, batchPrefix);
     }
+
     private void setMariadbSequences(BufferedWriter writer, long startValue, String taskPrefix, String batchPrefix) throws Exception {
         setGenericSequences(writer, startValue, taskPrefix, batchPrefix);
     }
 
-    private void setGenericSequences(BufferedWriter writer, long startValue, String taskPrefix, String batchPrefix) throws Exception{
+    private void setGenericSequences(BufferedWriter writer, long startValue, String taskPrefix, String batchPrefix) throws Exception {
         writer.write("\n\nALTER SEQUENCE " + taskPrefix + "_SEQ START WITH " + startValue + "; \n");
         writer.write("ALTER SEQUENCE " + batchPrefix + "_JOB_SEQ START WITH " + startValue + "; \n");
         writer.write("ALTER SEQUENCE " + batchPrefix + "_STEP_EXECUTION_SEQ START WITH " + startValue + "; \n");
