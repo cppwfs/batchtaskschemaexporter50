@@ -1,0 +1,36 @@
+insert into TASK_EXECUTION (END_TIME, ERROR_MESSAGE, EXIT_CODE, EXIT_MESSAGE, EXTERNAL_EXECUTION_ID, LAST_UPDATED, PARENT_EXECUTION_ID, START_TIME, TASK_EXECUTION_ID, TASK_NAME)values ('2023-01-17 11:27:39.770987','java.lang.IllegalStateException: Failed to execute ApplicationRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:761)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:748)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
+	at io.spring.batchschema.AbstractBatchExport.generateImportFile(AbstractBatchExport.java:268)
+	at io.spring.batchschema.AbstractBatchExport.generateImportFile(AbstractBatchExport.java:249)
+	at io.spring.batchschema.simplefailedtask.SingleFailedTaskTest.testTaskExecution(SingleFailedTaskTest.java:18)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestTemplateMethod(TimeoutExtension.java:94)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorCha','1',NULL,NULL,'2023-01-17 11:27:39.0',NULL,'2023-01-17 11:27:39.723149','1','application');
+insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values ('1','--logging.level.org.springframework.cloud.task=DEBUG');
+insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values ('1','--spring.datasource.password=test');
+insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values ('1','--spring.datasource.username=test');
+insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values ('1','--spring.datasource.url=jdbc:mariadb://localhost:53917/test');
+insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values ('1','--spring.datasource.driverClassName=org.mariadb.jdbc.Driver');
+
+
+ALTER SEQUENCE TASK_SEQ START WITH 1000; 
+ALTER SEQUENCE BATCH_JOB_SEQ START WITH 1000; 
+ALTER SEQUENCE BATCH_STEP_EXECUTION_SEQ START WITH 1000; 
+ALTER SEQUENCE BATCH_JOB_EXECUTION_SEQ START WITH 1000; 

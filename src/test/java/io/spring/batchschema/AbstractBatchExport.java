@@ -264,12 +264,17 @@ public abstract class AbstractBatchExport {
                 System.out.println("Application failed to run.   This may have been by design.  Verify with test.");
             }
         } else {
-            SpringApplication.run(clazz,
-                    "--logging.level.org.springframework.cloud.task=DEBUG",
-                    "--spring.datasource.password=" + mariaDB.getPassword(),
-                    "--spring.datasource.username=" + mariaDB.getUsername(),
-                    "--spring.datasource.url=" + mariaDB.getJdbcUrl(),
-                    "--spring.datasource.driverClassName=org.mariadb.jdbc.Driver");
+            try {
+                SpringApplication.run(clazz,
+                        "--logging.level.org.springframework.cloud.task=DEBUG",
+                        "--spring.datasource.password=" + mariaDB.getPassword(),
+                        "--spring.datasource.username=" + mariaDB.getUsername(),
+                        "--spring.datasource.url=" + mariaDB.getJdbcUrl(),
+                        "--spring.datasource.driverClassName=org.mariadb.jdbc.Driver");
+            }
+            catch (Exception exception) {
+                System.out.println("Application failed to run.   This may have been by design.  Verify with test.");
+            }
         }
         configureImportFile(importFileName, prefix, databaseType, startValue);
     }
