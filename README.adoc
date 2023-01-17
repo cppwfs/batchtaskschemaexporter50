@@ -20,3 +20,13 @@ Thee 3 settings that allow you to change the behavior of what is produced for th
 1. Column 1 - *prefix:* Allows you to set the prefix for the task and batch tables.   Its default is `default` which means that the load scripts will use batch and task's default prefixes.   For example if you set the value in for the first column `batchexportconfig.csv` to `V3` then `TASK_EXECUTION`  would become `V3_EXECUTION`.
 2. Column 2 - *database type:* Allows you to specify the type of database for which the load data will be created. It defaults to MARIADB, but POSTGRES is also supported.
 3. Column 3 - *sequence start:* The number for which the sequences will be defaulted as their start value.  Defaults to 9000.
+
+== Load Files Test purpose
+
+* simplefailedtask.load - Contains an entry for a task execution that failed
+* simplesuccesstask.load - Contains an entry for a task execution that succeeds.
+* singleJobMultiStep.load - Contains the entries for a task execution with batch job that has 2 steps that ran successfully.
+* singleJobMultiStepFailedSecondStep.load - Contains the entries for a task execution with batch job that has 2 steps, step one succeeds but the second step fails thus causing the job to fail.  However, the task succeeds. (Default behavior of a batch boot application)
+* singleJobMultiStepFailedSecondStepExitCode.load - Contains the entries for a task execution with batch job that has 2 steps, step one succeeds but the second step fails thus causing the job to fail as well as the task execution. This is because `spring.cloud.task.batch.fail-on-job-failure` is set to true.
+* singleJobSingleStep.load - Contains the entries for a task execution with batch job that has one step that runs successfully.
+* singleJobSingleStepJobParam.load - Contains the entries for a task execution with batch job with a single job param that has one step that runs successfully.
