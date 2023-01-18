@@ -1,4 +1,4 @@
-insert into TASK_EXECUTION (END_TIME, ERROR_MESSAGE, EXIT_CODE, EXIT_MESSAGE, EXTERNAL_EXECUTION_ID, LAST_UPDATED, PARENT_EXECUTION_ID, START_TIME, TASK_EXECUTION_ID, TASK_NAME)values ('2023-01-18 13:13:10.887512','java.lang.IllegalStateException: Failed to execute ApplicationRunner
+insert into TASK_EXECUTION (END_TIME, ERROR_MESSAGE, EXIT_CODE, EXIT_MESSAGE, EXTERNAL_EXECUTION_ID, LAST_UPDATED, PARENT_EXECUTION_ID, START_TIME, TASK_EXECUTION_ID, TASK_NAME)values ('2023-01-18 18:17:34.703636','java.lang.IllegalStateException: Failed to execute ApplicationRunner
 	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:761)
 	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:748)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
@@ -6,7 +6,7 @@ insert into TASK_EXECUTION (END_TIME, ERROR_MESSAGE, EXIT_CODE, EXIT_MESSAGE, EX
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
 	at io.spring.batchschema.AbstractBatchExport.generateImportFile(AbstractBatchExport.java:268)
 	at io.spring.batchschema.AbstractBatchExport.generateImportFile(AbstractBatchExport.java:249)
-	at io.spring.batchschema.simplefailedtask.SingleFailedTaskTest.testTaskExecution(SingleFailedTaskTest.java:18)
+	at io.spring.batchschema.simplefailedtask.SingleFailedTaskTest.testTaskExecution(SingleFailedTaskTest.java:16)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -16,21 +16,21 @@ insert into TASK_EXECUTION (END_TIME, ERROR_MESSAGE, EXIT_CODE, EXIT_MESSAGE, EX
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
 	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
 	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestTemplateMethod(TimeoutExtension.java:94)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
 	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
 	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorCha','1',NULL,NULL,'2023-01-18 13:13:10.0',NULL,'2023-01-18 13:13:10.863229','9000','application');
-insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values ('9000','--logging.level.org.springframework.cloud.task=DEBUG');
-insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values ('9000','--spring.datasource.password=test');
-insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values ('9000','--spring.datasource.username=test');
-insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values ('9000','--spring.datasource.url=jdbc:mariadb://localhost:61770/test');
-insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values ('9000','--spring.datasource.driverClassName=org.mariadb.jdbc.Driver');
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:','1',NULL,NULL,'2023-01-18 18:17:34.0',NULL,'2023-01-18 18:17:34.654499',9000,'application');
+insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values (9000,'--logging.level.org.springframework.cloud.task=DEBUG');
+insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values (9000,'--spring.datasource.password=test');
+insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values (9000,'--spring.datasource.username=test');
+insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values (9000,'--spring.datasource.url=jdbc:mariadb://localhost:55604/test');
+insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values (9000,'--spring.datasource.driverClassName=org.mariadb.jdbc.Driver');
 
 
-ALTER SEQUENCE TASK_SEQ START WITH 9000; 
-ALTER SEQUENCE BATCH_JOB_SEQ START WITH 9000; 
-ALTER SEQUENCE BATCH_STEP_EXECUTION_SEQ START WITH 9000; 
-ALTER SEQUENCE BATCH_JOB_EXECUTION_SEQ START WITH 9000; 
+ALTER SEQUENCE BATCH_JOB_SEQ MINVALUE  9000 START 9000 RESTART 9000;
+ALTER SEQUENCE BATCH_STEP_EXECUTION_SEQ MINVALUE  9000 START 9000 RESTART 9000;
+ALTER SEQUENCE BATCH_JOB_EXECUTION_SEQ MINVALUE  9000 START 9000 RESTART 9000;
+ALTER SEQUENCE TASK_SEQ MINVALUE  9000 START 9000 RESTART 9000;

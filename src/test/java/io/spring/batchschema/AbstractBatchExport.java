@@ -80,8 +80,8 @@ public abstract class AbstractBatchExport {
                     "'" + row.get("END_TIME") + "'," +
                     "'" + row.get("EXIT_CODE") + "'," +
                     "'" + row.get("EXIT_MESSAGE") + "'," +
-                    "'" + row.get("JOB_EXECUTION_ID") + "'," +
-                    "'" + row.get("JOB_INSTANCE_ID") + "'," +
+                    "" + row.get("JOB_EXECUTION_ID") + "," +
+                    "" + row.get("JOB_INSTANCE_ID") + "," +
                     "'" + row.get("LAST_UPDATED") + "'," +
                     "'" + row.get("START_TIME") + "'," +
                     "'" + row.get("STATUS") + "'," +
@@ -97,7 +97,7 @@ public abstract class AbstractBatchExport {
                 "FROM BATCH_JOB_INSTANCE");
         for (Map<String, Object> row : result) {
             String batchInstance = "insert into " + prefix + "_JOB_INSTANCE (JOB_INSTANCE_ID, JOB_KEY, JOB_NAME, VERSION) " +
-                    "values ('" + row.get("JOB_INSTANCE_ID") + "'," +
+                    "values (" + row.get("JOB_INSTANCE_ID") + "," +
                     "'" + row.get("JOB_KEY") + "'," +
                     "'" + row.get("JOB_NAME") + "'," +
                     "'" + row.get("VERSION") + "'" +
@@ -117,25 +117,25 @@ public abstract class AbstractBatchExport {
                     "EXIT_MESSAGE, FILTER_COUNT, JOB_EXECUTION_ID, LAST_UPDATED, PROCESS_SKIP_COUNT, READ_COUNT, " +
                     "READ_SKIP_COUNT, ROLLBACK_COUNT, START_TIME, STATUS, STEP_EXECUTION_ID, STEP_NAME, " +
                     "VERSION, WRITE_COUNT, WRITE_SKIP_COUNT) " +
-                    "values ('" + row.get("COMMIT_COUNT") + "'," +
+                    "values (" + row.get("COMMIT_COUNT") + "," +
                     "'" + row.get("CREATE_TIME") + "'," +
                     "'" + row.get("END_TIME") + "'," +
                     "'" + row.get("EXIT_CODE") + "'," +
                     "'" + row.get("EXIT_MESSAGE") + "'," +
-                    "'" + row.get("FILTER_COUNT") + "'" + "," +
-                    "'" + row.get("JOB_EXECUTION_ID") + "'," +
+                    row.get("FILTER_COUNT") + "," +
+                    row.get("JOB_EXECUTION_ID") + "," +
                     "'" + row.get("LAST_UPDATED") + "'," +
-                    "'" + row.get("PROCESS_SKIP_COUNT") + "'," +
-                    "'" + row.get("READ_COUNT") + "'," +
-                    "'" + row.get("READ_SKIP_COUNT") + "'," +
-                    "'" + row.get("ROLLBACK_COUNT") + "'," +
+                    row.get("PROCESS_SKIP_COUNT") + "," +
+                    row.get("READ_COUNT") + "," +
+                    row.get("READ_SKIP_COUNT") + "," +
+                    row.get("ROLLBACK_COUNT") + "," +
                     "'" + row.get("START_TIME") + "'," +
                     "'" + row.get("STATUS") + "'," +
-                    "'" + row.get("STEP_EXECUTION_ID") + "'," +
+                    row.get("STEP_EXECUTION_ID") + "," +
                     "'" + row.get("STEP_NAME") + "'," +
                     "'" + row.get("VERSION") + "'," +
-                    "'" + row.get("WRITE_COUNT") + "'," +
-                    "'" + row.get("WRITE_SKIP_COUNT") + "'" +
+                    row.get("WRITE_COUNT") + "," +
+                     row.get("WRITE_SKIP_COUNT") +
                     ");\n";
             System.out.println(batchStepExecution);
             writer.write(batchStepExecution);
@@ -147,7 +147,7 @@ public abstract class AbstractBatchExport {
                 "FROM BATCH_JOB_EXECUTION_CONTEXT");
         for (Map<String, Object> row : result) {
             String batchExecutionContextInstance = "insert into " + prefix + "_JOB_EXECUTION_CONTEXT (JOB_EXECUTION_ID, SERIALIZED_CONTEXT, SHORT_CONTEXT)" +
-                    "values ('" + row.get("JOB_EXECUTION_ID") + "'," +
+                    "values (" + row.get("JOB_EXECUTION_ID") + "," +
                     replaceNullWithNull(row.get("SERIALIZED_CONTEXT")) + "," +
                     "'" + row.get("SHORT_CONTEXT") + "'" +
                     ");\n";
@@ -162,7 +162,7 @@ public abstract class AbstractBatchExport {
         for (Map<String, Object> row : result) {
             String batchExecutionWithParams = "insert into " + prefix + "_JOB_EXECUTION_PARAMS (JOB_EXECUTION_ID, PARAMETER_NAME, PARAMETER_TYPE, " +
                     "PARAMETER_VALUE, IDENTIFYING) " +
-                    "values ('" + row.get("JOB_EXECUTION_ID") + "'," +
+                    "values (" + row.get("JOB_EXECUTION_ID") + "," +
                     "'" + row.get("PARAMETER_NAME") + "'," +
                     "'" + row.get("PARAMETER_TYPE") + "'," +
                     "'" + row.get("PARAMETER_VALUE") + "'," +
@@ -189,7 +189,7 @@ public abstract class AbstractBatchExport {
                     "'" + row.get("LAST_UPDATED") + "'" + "," +
                     replaceNullWithNull(row.get("PARENT_EXECUTION_ID")) + "," +
                     "'" + row.get("START_TIME") + "'" + "," +
-                    "'" + row.get("TASK_EXECUTION_ID") + "'" + "," +
+                    "" + row.get("TASK_EXECUTION_ID") + "" + "," +
                     "'" + row.get("TASK_NAME") + "'" +
                     ");\n";
             System.out.println(taskExecutionInsert);
@@ -202,7 +202,7 @@ public abstract class AbstractBatchExport {
                 "FROM TASK_EXECUTION_PARAMS");
         for (Map<String, Object> row : result) {
             String taskExecutionParamInsert = "insert into " + prefix + "_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM)" +
-                    " values ('" + row.get("TASK_EXECUTION_ID") + "'," +
+                    " values (" + row.get("TASK_EXECUTION_ID") + "," +
                     "'" + row.get("TASK_PARAM") + "'" +
                     ");\n";
             System.out.println(taskExecutionParamInsert);
@@ -212,11 +212,11 @@ public abstract class AbstractBatchExport {
 
     private void generateTaskBatchInserts(BufferedWriter writer, JdbcTemplate template, String prefix) throws Exception {
         List<Map<String, Object>> result = template.queryForList("select TASK_EXECUTION_ID, JOB_EXECUTION_ID " +
-                "FROM " + prefix + "_TASK_BATCH");
+                "FROM TASK_TASK_BATCH");
         for (Map<String, Object> row : result) {
             String taskBatchInsert = "insert into TASK_TASK_BATCH (TASK_EXECUTION_ID, JOB_EXECUTION_ID)" +
-                    " values ('" + row.get("TASK_EXECUTION_ID") + "'," +
-                    "'" + row.get("JOB_EXECUTION_ID") + "'" +
+                    " values (" + row.get("TASK_EXECUTION_ID") + "," +
+                    row.get("JOB_EXECUTION_ID") +
                     ");\n";
             System.out.println(taskBatchInsert);
             writer.write(taskBatchInsert);
@@ -231,7 +231,7 @@ public abstract class AbstractBatchExport {
                     "SHORT_CONTEXT, STEP_EXECUTION_ID) values (" +
                     replaceNullWithNull(row.get("SERIALIZED_CONTEXT")) + "," +
                     "'" + row.get("SHORT_CONTEXT") + "'," +
-                    "'" + row.get("STEP_EXECUTION_ID") + "'" +
+                    "" + row.get("STEP_EXECUTION_ID") + "" +
                     ");\n";
             System.out.println(batchStepExecutionContext);
             writer.write(batchStepExecutionContext);
@@ -245,12 +245,12 @@ public abstract class AbstractBatchExport {
         return "'" + value + "'";
     }
 
-    protected void generateImportFile(Class clazz, String importFileName, String prefix, String databaseType, long startValue) throws Exception {
-        generateImportFile(clazz, importFileName, prefix, databaseType, null, startValue);
+    protected void generateImportFile(Class clazz, String importFileName) throws Exception {
+        generateImportFile(clazz, importFileName, null);
     }
 
-    protected void generateImportFile(Class clazz, String importFileName, String prefix, String databaseType, String param, long startValue) throws Exception {
-        setTestSequenceToStartValue(startValue);
+    protected void generateImportFile(Class clazz, String importFileName, String param) throws Exception {
+        setTestSequenceToStartValue(getSequenceStart());
         if (param != null) {
             try {
                 SpringApplication.run(clazz,
@@ -276,7 +276,7 @@ public abstract class AbstractBatchExport {
                 System.out.println("Application failed to run.   This may have been by design.  Verify with test.");
             }
         }
-        configureImportFile(importFileName, prefix, databaseType, startValue);
+        configureImportFile(importFileName, getPrefix(), getDatabaseType(), getSequenceStart());
     }
 
     private void setTestSequenceToStartValue(long startValue) {
@@ -304,8 +304,10 @@ public abstract class AbstractBatchExport {
     }
 
     private void setMariadbSequences(BufferedWriter writer, long startValue, String taskPrefix, String batchPrefix) throws Exception {
-        setGenericSequences(writer, startValue, taskPrefix, batchPrefix);
-    }
+        writer.write("\n\nALTER SEQUENCE BATCH_JOB_SEQ MINVALUE  " + startValue + " START " + startValue  + " RESTART " + startValue +";\n");
+        writer.write("ALTER SEQUENCE BATCH_STEP_EXECUTION_SEQ MINVALUE  " + startValue + " START " + startValue  + " RESTART " + startValue +";\n");
+        writer.write("ALTER SEQUENCE BATCH_JOB_EXECUTION_SEQ MINVALUE  " + startValue + " START " + startValue  + " RESTART " + startValue +";\n");
+        writer.write("ALTER SEQUENCE TASK_SEQ MINVALUE  " + startValue + " START " + startValue  + " RESTART " + startValue +";\n");    }
 
     private void setGenericSequences(BufferedWriter writer, long startValue, String taskPrefix, String batchPrefix) throws Exception {
         writer.write("\n\nALTER SEQUENCE " + taskPrefix + "_SEQ START WITH " + startValue + "; \n");
@@ -313,4 +315,32 @@ public abstract class AbstractBatchExport {
         writer.write("ALTER SEQUENCE " + batchPrefix + "_STEP_EXECUTION_SEQ START WITH " + startValue + "; \n");
         writer.write("ALTER SEQUENCE " + batchPrefix + "_JOB_EXECUTION_SEQ START WITH " + startValue + "; \n");
     }
+
+    /**
+     * Retrieve the current Sequence Value from the environment variable sequenceval or the default which is 9000.
+     * @return the sequence value.
+     */
+    private long getSequenceStart() {
+        String sequenceVal = System.getenv().get("sequenceval");
+        if (sequenceVal == null) {
+            sequenceVal = "9000";
+        }
+        return Long.valueOf(sequenceVal);
+    }
+    private String getPrefix() {
+        String prefixVal = System.getenv().get("prefixval");
+        if (prefixVal == null) {
+            prefixVal = "default";
+        }
+        return prefixVal;
+    }
+
+    private String getDatabaseType() {
+        String databaseTypeVal = System.getenv().get("databasetypeval");
+        if (databaseTypeVal == null) {
+            databaseTypeVal = "MARIADB";
+        }
+        return databaseTypeVal;
+    }
+
 }

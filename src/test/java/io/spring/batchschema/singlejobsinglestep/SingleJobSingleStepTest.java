@@ -1,8 +1,7 @@
 package io.spring.batchschema.singlejobsinglestep;
 
 import io.spring.batchschema.AbstractBatchExport;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.api.Test;
 
 
 public class SingleJobSingleStepTest extends AbstractBatchExport {
@@ -12,10 +11,9 @@ public class SingleJobSingleStepTest extends AbstractBatchExport {
      * When a user needs to execute a single batch job that has a single step and no job parameters established
      * Then the job is run and the metadata for the job, steps, and tasks are recorded.
      */
-    @ParameterizedTest
-    @CsvFileSource(resources = "/batchexportconfig.csv")
-    void testJobExecution(String prefix, String databaseType, long sequenceStartVal) throws Exception {
-        generateImportFile(BatchSingleApplication.class, "singleJobSingleStep.load", prefix, databaseType, sequenceStartVal);
+    @Test
+    void testJobExecution() throws Exception {
+        generateImportFile(BatchSingleApplication.class, "singleJobSingleStep.load");
     }
 
 }

@@ -1,8 +1,7 @@
 package io.spring.batchschema.simplesuccesstask;
 
 import io.spring.batchschema.AbstractBatchExport;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.api.Test;
 
 
 public class SingleTaskTest extends AbstractBatchExport {
@@ -12,10 +11,9 @@ public class SingleTaskTest extends AbstractBatchExport {
      * When a user needs to execute a single task application
      * Then task is recorded.
      */
-    @ParameterizedTest
-    @CsvFileSource(resources = "/batchexportconfig.csv")
-    void testTaskExecution(String prefix, String databaseType, long sequenceStartVal) throws Exception {
-        generateImportFile(TaskApplication.class, "simplesuccesstask.load", prefix, databaseType, sequenceStartVal);
+    @Test
+    void testTaskExecution() throws Exception {
+        generateImportFile(TaskApplication.class, "simplesuccesstask.load");
     }
 
 }
