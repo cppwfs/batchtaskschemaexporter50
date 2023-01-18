@@ -71,7 +71,7 @@ public abstract class AbstractBatchExport {
     private void generateBatchJobExecutionInserts(BufferedWriter writer, JdbcTemplate template, String prefix) throws Exception {
         List<Map<String, Object>> result = template.queryForList("select CREATE_TIME, END_TIME, EXIT_CODE, EXIT_MESSAGE, " +
                 "JOB_EXECUTION_ID, JOB_INSTANCE_ID, LAST_UPDATED, START_TIME, " +
-                "STATUS, VERSION FROM " + prefix + "_JOB_EXECUTION");
+                "STATUS, VERSION FROM BATCH_JOB_EXECUTION");
         for (Map<String, Object> row : result) {
             String batchJobExecution = "insert into " + prefix + "_JOB_EXECUTION (CREATE_TIME, END_TIME, EXIT_CODE, EXIT_MESSAGE, " +
                     "JOB_EXECUTION_ID, JOB_INSTANCE_ID, LAST_UPDATED, START_TIME, " +
@@ -94,7 +94,7 @@ public abstract class AbstractBatchExport {
 
     private void generateBatchInstanceInserts(BufferedWriter writer, JdbcTemplate template, String prefix) throws Exception {
         List<Map<String, Object>> result = template.queryForList("SELECT JOB_INSTANCE_ID, JOB_KEY, JOB_NAME, VERSION " +
-                "FROM " + prefix + "_JOB_INSTANCE");
+                "FROM BATCH_JOB_INSTANCE");
         for (Map<String, Object> row : result) {
             String batchInstance = "insert into " + prefix + "_JOB_INSTANCE (JOB_INSTANCE_ID, JOB_KEY, JOB_NAME, VERSION) " +
                     "values ('" + row.get("JOB_INSTANCE_ID") + "'," +
@@ -111,7 +111,7 @@ public abstract class AbstractBatchExport {
         List<Map<String, Object>> result = template.queryForList("select COMMIT_COUNT, CREATE_TIME, END_TIME, EXIT_CODE, " +
                 "EXIT_MESSAGE, FILTER_COUNT, JOB_EXECUTION_ID, LAST_UPDATED, PROCESS_SKIP_COUNT, READ_COUNT, " +
                 "READ_SKIP_COUNT, ROLLBACK_COUNT, START_TIME, STATUS, STEP_EXECUTION_ID, STEP_NAME, " +
-                "VERSION, WRITE_COUNT, WRITE_SKIP_COUNT FROM " + prefix + "_STEP_EXECUTION");
+                "VERSION, WRITE_COUNT, WRITE_SKIP_COUNT FROM BATCH_STEP_EXECUTION");
         for (Map<String, Object> row : result) {
             String batchStepExecution = "insert into " + prefix + "_STEP_EXECUTION (COMMIT_COUNT, CREATE_TIME, END_TIME, EXIT_CODE, " +
                     "EXIT_MESSAGE, FILTER_COUNT, JOB_EXECUTION_ID, LAST_UPDATED, PROCESS_SKIP_COUNT, READ_COUNT, " +
@@ -144,7 +144,7 @@ public abstract class AbstractBatchExport {
 
     private void generateBatchExecutionContextInserts(BufferedWriter writer, JdbcTemplate template, String prefix) throws Exception {
         List<Map<String, Object>> result = template.queryForList("SELECT JOB_EXECUTION_ID, SERIALIZED_CONTEXT, SHORT_CONTEXT " +
-                "FROM " + prefix + "_JOB_EXECUTION_CONTEXT");
+                "FROM BATCH_JOB_EXECUTION_CONTEXT");
         for (Map<String, Object> row : result) {
             String batchExecutionContextInstance = "insert into " + prefix + "_JOB_EXECUTION_CONTEXT (JOB_EXECUTION_ID, SERIALIZED_CONTEXT, SHORT_CONTEXT)" +
                     "values ('" + row.get("JOB_EXECUTION_ID") + "'," +
@@ -158,7 +158,7 @@ public abstract class AbstractBatchExport {
 
     private void generateBatchExecutionWithParamInserts(BufferedWriter writer, JdbcTemplate template, String prefix) throws Exception {
         List<Map<String, Object>> result = template.queryForList("select JOB_EXECUTION_ID, PARAMETER_NAME, PARAMETER_TYPE, " +
-                "PARAMETER_VALUE, IDENTIFYING FROM " + prefix + "_JOB_EXECUTION_PARAMS");
+                "PARAMETER_VALUE, IDENTIFYING FROM BATCH_JOB_EXECUTION_PARAMS");
         for (Map<String, Object> row : result) {
             String batchExecutionWithParams = "insert into " + prefix + "_JOB_EXECUTION_PARAMS (JOB_EXECUTION_ID, PARAMETER_NAME, PARAMETER_TYPE, " +
                     "PARAMETER_VALUE, IDENTIFYING) " +
@@ -176,7 +176,7 @@ public abstract class AbstractBatchExport {
     private void generateTaskExecutionInserts(BufferedWriter writer, JdbcTemplate template, String prefix) throws Exception {
         List<Map<String, Object>> result = template.queryForList("select END_TIME, ERROR_MESSAGE, EXIT_CODE, " +
                 "EXIT_MESSAGE, EXTERNAL_EXECUTION_ID, LAST_UPDATED, PARENT_EXECUTION_ID, START_TIME, " +
-                "TASK_EXECUTION_ID, TASK_NAME FROM " + prefix + "_EXECUTION");
+                "TASK_EXECUTION_ID, TASK_NAME FROM TASK_EXECUTION");
         for (Map<String, Object> row : result) {
             String taskExecutionInsert = "insert into " + prefix + "_EXECUTION (END_TIME, ERROR_MESSAGE, EXIT_CODE, " +
                     "EXIT_MESSAGE, EXTERNAL_EXECUTION_ID, LAST_UPDATED, PARENT_EXECUTION_ID, START_TIME, " +
@@ -199,7 +199,7 @@ public abstract class AbstractBatchExport {
 
     private void generateTaskExecutionParamInserts(BufferedWriter writer, JdbcTemplate template, String prefix) throws Exception {
         List<Map<String, Object>> result = template.queryForList("select TASK_EXECUTION_ID, TASK_PARAM " +
-                "FROM " + prefix + "_EXECUTION_PARAMS");
+                "FROM TASK_EXECUTION_PARAMS");
         for (Map<String, Object> row : result) {
             String taskExecutionParamInsert = "insert into " + prefix + "_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM)" +
                     " values ('" + row.get("TASK_EXECUTION_ID") + "'," +
@@ -214,7 +214,7 @@ public abstract class AbstractBatchExport {
         List<Map<String, Object>> result = template.queryForList("select TASK_EXECUTION_ID, JOB_EXECUTION_ID " +
                 "FROM " + prefix + "_TASK_BATCH");
         for (Map<String, Object> row : result) {
-            String taskBatchInsert = "insert into " + prefix + "_TASK_BATCH (TASK_EXECUTION_ID, JOB_EXECUTION_ID)" +
+            String taskBatchInsert = "insert into TASK_TASK_BATCH (TASK_EXECUTION_ID, JOB_EXECUTION_ID)" +
                     " values ('" + row.get("TASK_EXECUTION_ID") + "'," +
                     "'" + row.get("JOB_EXECUTION_ID") + "'" +
                     ");\n";
@@ -225,7 +225,7 @@ public abstract class AbstractBatchExport {
 
     private void generateBatchStepExecutionContextInserts(BufferedWriter writer, JdbcTemplate template, String prefix) throws Exception {
         List<Map<String, Object>> result = template.queryForList("select SERIALIZED_CONTEXT, SHORT_CONTEXT, " +
-                "STEP_EXECUTION_ID FROM " + prefix + "_STEP_EXECUTION_CONTEXT");
+                "STEP_EXECUTION_ID FROM BATCH_STEP_EXECUTION_CONTEXT");
         for (Map<String, Object> row : result) {
             String batchStepExecutionContext = "insert into " + prefix + "_STEP_EXECUTION_CONTEXT (SERIALIZED_CONTEXT, " +
                     "SHORT_CONTEXT, STEP_EXECUTION_ID) values (" +
@@ -281,10 +281,11 @@ public abstract class AbstractBatchExport {
 
     private void setTestSequenceToStartValue(long startValue) {
         JdbcTemplate template = new JdbcTemplate(dataSource);
-        template.execute("ALTER SEQUENCE BATCH_JOB_SEQ START WITH " + startValue + ";");
-        template.execute("ALTER SEQUENCE BATCH_STEP_EXECUTION_SEQ START WITH " + startValue + ";");
-        template.execute("ALTER SEQUENCE BATCH_JOB_EXECUTION_SEQ START WITH " + startValue + ";");
-        template.execute("ALTER SEQUENCE TASK_SEQ START WITH " + startValue + ";");
+        template.execute("ALTER SEQUENCE BATCH_JOB_SEQ MINVALUE  " + startValue + " START " + startValue  + " RESTART " + startValue +";");
+        template.execute("ALTER SEQUENCE BATCH_STEP_EXECUTION_SEQ MINVALUE  " + startValue + " START " + startValue  + " RESTART " + startValue +";");
+        template.execute("ALTER SEQUENCE BATCH_JOB_EXECUTION_SEQ MINVALUE  " + startValue + " START " + startValue  + " RESTART " + startValue +";");
+        template.execute("ALTER SEQUENCE TASK_SEQ MINVALUE  " + startValue + " START " + startValue  + " RESTART " + startValue +";");
+
     }
 
     private void setSequences(BufferedWriter writer, long startIndex, String prefix, String databaseType) throws Exception {
