@@ -39,7 +39,7 @@ class Batchschema30ApplicationTests {
 			ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
 			databasePopulator.addScript(new ClassPathResource("/org/springframework/batch/core/schema-mariadb.sql"));
 			databasePopulator.addScript(new ClassPathResource("/org/springframework/cloud/task/schema-mariadb.sql"));
-			databasePopulator.addScript(new FileSystemResource("/Users/grenfro/Downloads/batchschema/batchloadfiles/singleJobSingleStepJobParam.load"));
+			databasePopulator.addScript(new FileSystemResource("batchloadfiles/singleJobSingleStepJobParam.load"));
 			databasePopulator.execute(dataSource);
 	}
 
