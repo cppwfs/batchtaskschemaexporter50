@@ -1,5 +1,5 @@
 insert into BATCH_JOB_INSTANCE (JOB_INSTANCE_ID, JOB_KEY, JOB_NAME, VERSION) values (9000,'d41d8cd98f00b204e9800998ecf8427e','jobmultistepexitcode','0');
-insert into BATCH_JOB_EXECUTION (CREATE_TIME, END_TIME, EXIT_CODE, EXIT_MESSAGE, JOB_EXECUTION_ID, JOB_INSTANCE_ID, LAST_UPDATED, START_TIME, STATUS, VERSION) values ('2023-01-18 18:18:14.670639','2023-01-18 18:18:14.816186','FAILED','java.lang.IllegalStateException: WHOOPS
+insert into BATCH_JOB_EXECUTION (CREATE_TIME, END_TIME, EXIT_CODE, EXIT_MESSAGE, JOB_EXECUTION_ID, JOB_INSTANCE_ID, LAST_UPDATED, START_TIME, STATUS, VERSION) values ('2023-01-20 09:09:26.715941','2023-01-20 09:09:26.846103','FAILED','java.lang.IllegalStateException: WHOOPS
 	at io.spring.batchschema.singlejobexitcode.TestSingleJobMultiStepExitCodeConfiguration$2.execute(TestSingleJobMultiStepExitCodeConfiguration.java:44)
 	at org.springframework.batch.core.step.tasklet.TaskletStep$ChunkTransactionCallback.doInTransaction(TaskletStep.java:389)
 	at org.springframework.batch.core.step.tasklet.TaskletStep$ChunkTransactionCallback.doInTransaction(TaskletStep.java:313)
@@ -22,9 +22,9 @@ insert into BATCH_JOB_EXECUTION (CREATE_TIME, END_TIME, EXIT_CODE, EXIT_MESSAGE,
 	at org.springframework.cloud.task.batch.handler.TaskJobLauncherApplicationRunner.execute(TaskJobLauncherApplicationRunner.java:145)
 	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.executeLocalJobs(JobLauncherApplicationRunner.java:178)
 	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.launchJobFromProperties(JobLauncherApplicationRunner.java:166)
-	at org.springframework.cloud.task.batch.handler.TaskJobLauncherApplicationRunner.run(TaskJobLauncherApplicationRunner.ja',9000,9000,'2023-01-18 18:18:14.81725','2023-01-18 18:18:14.678793','FAILED','2');
-insert into BATCH_STEP_EXECUTION (COMMIT_COUNT, CREATE_TIME, END_TIME, EXIT_CODE, EXIT_MESSAGE, FILTER_COUNT, JOB_EXECUTION_ID, LAST_UPDATED, PROCESS_SKIP_COUNT, READ_COUNT, READ_SKIP_COUNT, ROLLBACK_COUNT, START_TIME, STATUS, STEP_EXECUTION_ID, STEP_NAME, VERSION, WRITE_COUNT, WRITE_SKIP_COUNT) values (1,'2023-01-18 18:18:14.699827','2023-01-18 18:18:14.73798','COMPLETED','',0,9000,'2023-01-18 18:18:14.738739',0,0,0,0,'2023-01-18 18:18:14.709027','COMPLETED',9000,'job1step1','3',0,0);
-insert into BATCH_STEP_EXECUTION (COMMIT_COUNT, CREATE_TIME, END_TIME, EXIT_CODE, EXIT_MESSAGE, FILTER_COUNT, JOB_EXECUTION_ID, LAST_UPDATED, PROCESS_SKIP_COUNT, READ_COUNT, READ_SKIP_COUNT, ROLLBACK_COUNT, START_TIME, STATUS, STEP_EXECUTION_ID, STEP_NAME, VERSION, WRITE_COUNT, WRITE_SKIP_COUNT) values (0,'2023-01-18 18:18:14.764041','2023-01-18 18:18:14.800235','FAILED','java.lang.IllegalStateException: WHOOPS
+	at org.springframework.cloud.task.batch.handler.TaskJobLauncherApplicationRunner.run(TaskJobLauncherApplicationRunner.ja',9000,9000,'2023-01-20 09:09:26.846662','2023-01-20 09:09:26.725177','FAILED','2');
+insert into BATCH_STEP_EXECUTION (COMMIT_COUNT, CREATE_TIME, END_TIME, EXIT_CODE, EXIT_MESSAGE, FILTER_COUNT, JOB_EXECUTION_ID, LAST_UPDATED, PROCESS_SKIP_COUNT, READ_COUNT, READ_SKIP_COUNT, ROLLBACK_COUNT, START_TIME, STATUS, STEP_EXECUTION_ID, STEP_NAME, VERSION, WRITE_COUNT, WRITE_SKIP_COUNT) values (1,'2023-01-20 09:09:26.742386','2023-01-20 09:09:26.778173','COMPLETED','',0,9000,'2023-01-20 09:09:26.779176',0,0,0,0,'2023-01-20 09:09:26.752046','COMPLETED',9000,'job1step1','3',0,0);
+insert into BATCH_STEP_EXECUTION (COMMIT_COUNT, CREATE_TIME, END_TIME, EXIT_CODE, EXIT_MESSAGE, FILTER_COUNT, JOB_EXECUTION_ID, LAST_UPDATED, PROCESS_SKIP_COUNT, READ_COUNT, READ_SKIP_COUNT, ROLLBACK_COUNT, START_TIME, STATUS, STEP_EXECUTION_ID, STEP_NAME, VERSION, WRITE_COUNT, WRITE_SKIP_COUNT) values (0,'2023-01-20 09:09:26.802801','2023-01-20 09:09:26.835879','FAILED','java.lang.IllegalStateException: WHOOPS
 	at io.spring.batchschema.singlejobexitcode.TestSingleJobMultiStepExitCodeConfiguration$2.execute(TestSingleJobMultiStepExitCodeConfiguration.java:44)
 	at org.springframework.batch.core.step.tasklet.TaskletStep$ChunkTransactionCallback.doInTransaction(TaskletStep.java:389)
 	at org.springframework.batch.core.step.tasklet.TaskletStep$ChunkTransactionCallback.doInTransaction(TaskletStep.java:313)
@@ -47,11 +47,11 @@ insert into BATCH_STEP_EXECUTION (COMMIT_COUNT, CREATE_TIME, END_TIME, EXIT_CODE
 	at org.springframework.cloud.task.batch.handler.TaskJobLauncherApplicationRunner.execute(TaskJobLauncherApplicationRunner.java:145)
 	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.executeLocalJobs(JobLauncherApplicationRunner.java:178)
 	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.launchJobFromProperties(JobLauncherApplicationRunner.java:166)
-	at org.springframework.cloud.task.batch.handler.TaskJobLauncherApplicationRunner.run(TaskJobLauncherApplicationRunner.ja',0,9000,'2023-01-18 18:18:14.80205',0,0,0,1,'2023-01-18 18:18:14.77372','FAILED',9001,'job1step2','2',0,0);
+	at org.springframework.cloud.task.batch.handler.TaskJobLauncherApplicationRunner.run(TaskJobLauncherApplicationRunner.ja',0,9000,'2023-01-20 09:09:26.836867',0,0,0,1,'2023-01-20 09:09:26.815543','FAILED',9001,'job1step2','2',0,0);
 insert into BATCH_JOB_EXECUTION_CONTEXT (JOB_EXECUTION_ID, SERIALIZED_CONTEXT, SHORT_CONTEXT)values (9000,NULL,'rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHhwP0AAAAAAAAx3CAAAABAAAAABdAANYmF0Y2gudmVyc2lvbnQABTUuMC4weA==');
 insert into BATCH_STEP_EXECUTION_CONTEXT (SERIALIZED_CONTEXT, SHORT_CONTEXT, STEP_EXECUTION_ID) values (NULL,'rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHhwP0AAAAAAAAx3CAAAABAAAAADdAARYmF0Y2gudGFza2xldFR5cGV0AFVpby5zcHJpbmcuYmF0Y2hzY2hlbWEuc2luZ2xlam9iZXhpdGNvZGUuVGVzdFNpbmdsZUpvYk11bHRpU3RlcEV4aXRDb2RlQ29uZmlndXJhdGlvbiQxdAANYmF0Y2gudmVyc2lvbnQABTUuMC4wdAAOYmF0Y2guc3RlcFR5cGV0ADdvcmcuc3ByaW5nZnJhbWV3b3JrLmJhdGNoLmNvcmUuc3RlcC50YXNrbGV0LlRhc2tsZXRTdGVweA==',9000);
 insert into BATCH_STEP_EXECUTION_CONTEXT (SERIALIZED_CONTEXT, SHORT_CONTEXT, STEP_EXECUTION_ID) values (NULL,'rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHhwP0AAAAAAAAx3CAAAABAAAAADdAARYmF0Y2gudGFza2xldFR5cGV0AFVpby5zcHJpbmcuYmF0Y2hzY2hlbWEuc2luZ2xlam9iZXhpdGNvZGUuVGVzdFNpbmdsZUpvYk11bHRpU3RlcEV4aXRDb2RlQ29uZmlndXJhdGlvbiQydAANYmF0Y2gudmVyc2lvbnQABTUuMC4wdAAOYmF0Y2guc3RlcFR5cGV0ADdvcmcuc3ByaW5nZnJhbWV3b3JrLmJhdGNoLmNvcmUuc3RlcC50YXNrbGV0LlRhc2tsZXRTdGVweA==',9001);
-insert into TASK_EXECUTION (END_TIME, ERROR_MESSAGE, EXIT_CODE, EXIT_MESSAGE, EXTERNAL_EXECUTION_ID, LAST_UPDATED, PARENT_EXECUTION_ID, START_TIME, TASK_EXECUTION_ID, TASK_NAME)values ('2023-01-18 18:18:14.824522','java.lang.IllegalStateException: Failed to execute ApplicationRunner
+insert into TASK_EXECUTION (END_TIME, ERROR_MESSAGE, EXIT_CODE, EXIT_MESSAGE, EXTERNAL_EXECUTION_ID, LAST_UPDATED, PARENT_EXECUTION_ID, START_TIME, TASK_EXECUTION_ID, TASK_NAME)values ('2023-01-20 09:09:26.851427','java.lang.IllegalStateException: Failed to execute ApplicationRunner
 	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:761)
 	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:748)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
@@ -75,11 +75,11 @@ insert into TASK_EXECUTION (END_TIME, ERROR_MESSAGE, EXIT_CODE, EXIT_MESSAGE, EX
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.in','1',NULL,NULL,'2023-01-18 18:18:14.0',NULL,'2023-01-18 18:18:14.621132',9000,'application');
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.in','1',NULL,NULL,'2023-01-20 09:09:26.0',NULL,'2023-01-20 09:09:26.673757',9000,'application');
 insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values (9000,'--logging.level.org.springframework.cloud.task=DEBUG');
 insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values (9000,'--spring.datasource.password=test');
 insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values (9000,'--spring.datasource.username=test');
-insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values (9000,'--spring.datasource.url=jdbc:mariadb://localhost:55769/test');
+insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values (9000,'--spring.datasource.url=jdbc:mariadb://localhost:49495/test');
 insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values (9000,'--spring.datasource.driverClassName=org.mariadb.jdbc.Driver');
 insert into TASK_EXECUTION_PARAMS (TASK_EXECUTION_ID, TASK_PARAM) values (9000,'--spring.cloud.task.batch.fail-on-job-failure=true');
 insert into TASK_TASK_BATCH (TASK_EXECUTION_ID, JOB_EXECUTION_ID) values (9000,9000);
