@@ -32,7 +32,7 @@ There are 3 configurations that allow you to change the behavior of what is prod
 For example to create the singleJobSingleStep.load file with the V4 prefix for the POSTGRESQL database type starting at sequence id 505 you would run the following.
 ```bash
 export sequenceval=505
-export prefixval=V4
+export prefixval=V5
 export databasetypeval=POSTGRESQL
 mvn -Dtest=SingleJobSingleStepTest test
 ```
